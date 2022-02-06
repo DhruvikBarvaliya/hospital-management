@@ -7,7 +7,7 @@ const roomRoute = require('./RoomRoute');
 const billRoute = require('./BillRoute');
 
 router.get('/', (req, res) => {
-    res.send("Welcome to Hospital Management")
+    res.send("Inside Index Router")
 })
 
 router.use('/api',

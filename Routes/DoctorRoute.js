@@ -3,7 +3,7 @@ const router = express.Router()
 const doctorCotroller = require('../Controllers/DoctorController')
 
 router.get('/', (req, res) => {
-    res.send("Inside Room Router")
+    res.send("Inside Doctor Router")
 })
 
 router.post('/addDoctor', doctorCotroller.addDoctor);
