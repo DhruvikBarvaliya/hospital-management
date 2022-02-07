@@ -1,3 +1,5 @@
+const { connection } = require('../Config/Config')
+
 module.exports = {
 
     addRoom: (req, res) => {

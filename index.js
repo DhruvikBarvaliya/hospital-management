@@ -1,8 +1,13 @@
 const express = require('express');
 const app = express();
-const { port } = require('./Config/Config')
+const { port, connection } = require('./Config/Config')
 const indexRouter = require('./Routes/IndexRoute')
 
+connection.connect((err) => {
+    if (err)   throw err;
+    console.log("Database Connected");
+
+})
 app.use(express.json());
 app.use(express.urlencoded({ urlencoded: false }))
 app.use(indexRouter)
