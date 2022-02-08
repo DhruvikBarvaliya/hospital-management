@@ -4,7 +4,7 @@ const { port, connection } = require('./Config/Config')
 const indexRouter = require('./Routes/IndexRoute')
 
 connection.connect((err) => {
-    if (err)   throw err;
+    if (err) throw err;
     console.log("Database Connected");
 
 })

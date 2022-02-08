@@ -5,6 +5,9 @@ const nurseRoute = require('./NurseRoute');
 const patient = require('./Patient');
 const roomRoute = require('./RoomRoute');
 const billRoute = require('./BillRoute');
+const departmentRoute = require('./DepartmentRoute');
+const appointmentRoute = require('./AppointmentRoute');
+const staffRoute = require('./StaffRoute');
 
 router.get('/', (req, res) => {
     res.send("Inside Index Router")
@@ -15,7 +18,10 @@ router.use('/api',
     nurseRoute,
     patient,
     roomRoute,
-    billRoute
+    billRoute,
+    departmentRoute,
+    appointmentRoute,
+    staffRoute
 )
 
 module.exports = router;
