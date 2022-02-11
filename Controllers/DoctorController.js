@@ -3,11 +3,12 @@ const { connection } = require('../Config/Config')
 module.exports = {
 
     addDoctor: (req, res) => {
-        connection.query('create table doctors (id int(11) not null AUTO_INCREMENT primary key ,doctorname varchar(255));', (err, result) => {
+        let { full_name, email, password, age, address, gender, specialization, degree, fee, department_id } = req.body
+        connection.query(`insert into doctors values('${full_name}', '${email}', '${password}', '${age}', '${address}', '${gender}', '${specialization}', '${degree}', '${fee}', '${department_id}')`, (err, result) => {
             if (err) {
                 throw err;
             } else {
-                console.log("Table created");
+                console.log("Doctor Table created");
                 return res.status(200).send(result)
             }
         })
