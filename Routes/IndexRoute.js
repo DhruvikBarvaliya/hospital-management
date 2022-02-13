@@ -8,6 +8,7 @@ const billRoute = require('./BillRoute');
 const departmentRoute = require('./DepartmentRoute');
 const appointmentRoute = require('./AppointmentRoute');
 const staffRoute = require('./StaffRoute');
+const createAllTable = require('./CreateAllTable')
 
 router.get('/', (req, res) => {
     res.send("Inside Index Router")
@@ -21,7 +22,8 @@ router.use('/api',
     billRoute,
     departmentRoute,
     appointmentRoute,
-    staffRoute
+    staffRoute,
+    createAllTable
 )
 
 module.exports = router;

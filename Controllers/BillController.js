@@ -13,23 +13,51 @@ module.exports = {
             if (err) {
                 throw err;
             } else {
-                console.log("Bill Data Inserted");
                 return res.status(200).send(result)
             }
         })
 
     },
     getAllBill: (req, res) => {
-
+        connection.query(`select * from bills;`, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                return res.status(200).send(result)
+            }
+        })
     },
     getBillById: (req, res) => {
-
+        let id = req.params.id
+        connection.query(`select * from bills where id=${id};`, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                return res.status(200).send(result)
+            }
+        })
     },
     updateBill: (req, res) => {
-
+        let id = req.params.id
+        let { full_name, position, ssn, registered } = req.body
+        let sql = `update bills set full_name=?, position=?, ssn=?, registered=? where id=${id}`;
+        connection.query(sql, [full_name, position, ssn, registered], (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                return res.status(200).send(result)
+            }
+        })
     },
     deleteBill: (req, res) => {
-
+        let id = req.params.id
+        connection.query(`delete from bills where id=${id};`, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                return res.status(200).send(result)
+            }
+        })
     }
 
 }

@@ -12,22 +12,50 @@ module.exports = {
             if (err) {
                 throw err;
             } else {
-                console.log("Patient Data Inserted");
                 return res.status(200).send(result)
             }
         })
     },
     getAllPatient: (req, res) => {
-
+        connection.query(`select * from patients;`, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                return res.status(200).send(result)
+            }
+        })
     },
     getPatientById: (req, res) => {
-
+        let id = req.params.id
+        connection.query(`select * from patients where id=${id};`, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                return res.status(200).send(result)
+            }
+        })
     },
     updatePatient: (req, res) => {
-
+        let id = req.params.id
+        let { full_name, position, ssn, registered } = req.body
+        let sql = `update patients set full_name=?, position=?, ssn=?, registered=? where id=${id}`;
+        connection.query(sql, [full_name, position, ssn, registered], (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                return res.status(200).send(result)
+            }
+        })
     },
     deletePatient: (req, res) => {
-
+        let id = req.params.id
+        connection.query(`delete from patients where id=${id};`, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                return res.status(200).send(result)
+            }
+        })
     }
 
 }
