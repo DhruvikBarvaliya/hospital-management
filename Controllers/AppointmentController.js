@@ -7,11 +7,11 @@ module.exports = {
             created, appointment_status } = req.body
 
         connection.query(`insert into appointments ( patient_id, appointment_date, appointment_time, room_id, doctor_id, consultancy_fee,
-                created, appointment_status) values ('${patient_id}, '${appointment_date}', '${appointment_time}', '${room_id}', '${doctor_id}', 
+                created, appointment_status) values ('${patient_id}', '${appointment_date}', '${appointment_time}', '${room_id}', '${doctor_id}', 
                 '${consultancy_fee}','${created}', '${appointment_status}')`, (err, result) => {
             if (err) {
                 throw err;
-            } else {
+            } else { 
                 return res.status(200).send(result)
             }
         })
@@ -26,7 +26,7 @@ module.exports = {
         })
     },
     getAppointmentById: (req, res) => {
-        let id = req.params.id
+        let id = req.query.id
         connection.query(`select * from appointments where id=${id};`, (err, result) => {
             if (err) {
                 throw err;
@@ -36,10 +36,13 @@ module.exports = {
         })
     },
     updateAppointment: (req, res) => {
-        let id = req.params.id
-        let { full_name, position, ssn, registered } = req.body
-        let sql = `update appointments set full_name=?, position=?, ssn=?, registered=? where id=${id}`;
-        connection.query(sql, [full_name, position, ssn, registered], (err, result) => {
+        let id = req.query.id
+        let { patient_id, appointment_date, appointment_time, room_id, doctor_id, consultancy_fee,
+            created, appointment_status} = req.body
+        let sql = `update appointments set  patient_id=?, appointment_date=?, appointment_time=?, room_id=?, doctor_id=?, consultancy_fee=?,
+        created=?, appointment_status=? where id=${id}`;
+        connection.query(sql, [ patient_id, appointment_date, appointment_time, room_id, doctor_id, consultancy_fee,
+            created, appointment_status], (err, result) => {
             if (err) {
                 throw err;
             } else {
@@ -48,8 +51,8 @@ module.exports = {
         })
     },
     deleteAppointment: (req, res) => {
-        let id = req.params.id
-        connection.query(`delete from bills where id=${id};`, (err, result) => {
+        let id = req.query.id
+        connection.query(`delete from appointments where id=${id};`, (err, result) => {
             if (err) {
                 throw err;
             } else {

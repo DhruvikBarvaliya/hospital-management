@@ -46,7 +46,7 @@ module.exports = {
             }
         })
     },
-    deleteDepartment: (req, res) => {
+    deleteDepartment: (req, res) => { 
         let id = req.params.id
         connection.query(`delete from departments where id=${id};`, (err, result) => {
             if (err) {

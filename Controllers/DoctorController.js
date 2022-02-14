@@ -3,8 +3,8 @@ const { connection } = require('../Config/Config')
 module.exports = {
 
     addDoctor: (req, res) => {
-        let { full_name, email, password, age, address, gender, specialization, degree, fee, department_id } = req.body
-        connection.query(`insert into doctors values('${full_name}', '${email}', '${password}', '${age}', '${address}', '${gender}', '${specialization}', '${degree}', '${fee}', '${department_id}')`, (err, result) => {
+        let { id, full_name, email, password, age, address, gender, specialization, degree, fee, department_id } = req.body
+        connection.query(`insert into doctors values('${id}','${full_name}', '${email}', '${password}', ${age}, '${address}', '${gender}', '${specialization}', '${degree}', ${fee}, ${department_id})`, (err, result) => {
             if (err) {
                 throw err;
             } else {
@@ -22,7 +22,7 @@ module.exports = {
         })
     },
     getDoctorById: (req, res) => {
-        let id = req.params.id
+        let id = req.query.id
         connection.query(`select * from doctors where id=${id};`, (err, result) => {
             if (err) {
                 throw err;
@@ -32,10 +32,10 @@ module.exports = {
         })
     },
     updateDoctor: (req, res) => {
-        let id = req.params.id
-        let { full_name, position, ssn, registered } = req.body
-        let sql = `update doctors set full_name=?, position=?, ssn=?, registered=? where id=${id}`;
-        connection.query(sql, [full_name, position, ssn, registered], (err, result) => {
+        let id = req.query.id
+        let { full_name, email, password, age, address, gender, specialization, degree, fee, department_id } = req.body
+        let sql = `update doctors set full_name=?, email=?, password=?, age=?, address=?, gender=?, specialization=?, degree=?, fee=?, department_id=? where id=${id}`;
+        connection.query(sql, [full_name, email, password, age, address, gender, specialization, degree, fee, department_id], (err, result) => {
             if (err) {
                 throw err;
             } else {
@@ -44,7 +44,7 @@ module.exports = {
         })
     },
     deleteDoctor: (req, res) => {
-        let id = req.params.id
+        let id = req.query.id
         connection.query(`delete from doctors where id=${id};`, (err, result) => {
             if (err) {
                 throw err;

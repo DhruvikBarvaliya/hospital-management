@@ -34,9 +34,9 @@ module.exports = {
     },
     updateStaff: (req, res) => {
         let id = req.params.id
-        let { full_name, position, ssn, registered } = req.body
-        let sql = `update staffs set full_name=?, position=?, ssn=?, registered=? where id=${id}`;
-        connection.query(sql, [full_name, position, ssn, registered], (err, result) => {
+        let { job_title, full_name, gender, telephone, salary } = req.body
+        let sql = `update staffs set job_title=?, full_name=?, gender=?, telephone=?, salary=? where id=${id}`;
+        connection.query(sql, [job_title, full_name, gender, telephone, salary], (err, result) => {
             if (err) {
                 throw err;
             } else {
