@@ -3,8 +3,8 @@ const { connection } = require('../Config/Config')
 module.exports = {
 
     addDoctor: (req, res) => {
-        let { id, full_name, email, password, age, address, gender, specialization, degree, fee, department_id } = req.body
-        connection.query(`insert into doctors values('${id}','${full_name}', '${email}', '${password}', ${age}, '${address}', '${gender}', '${specialization}', '${degree}', ${fee}, ${department_id})`, (err, result) => {
+        let { full_name, email, password, age, address, gender, specialization, degree, fee, department_id } = req.body
+        connection.query(`insert into doctors (full_name, email, password, age, address, gender, specialization, degree, fee, department_id) values('${full_name}', '${email}', '${password}', ${age}, '${address}', '${gender}', '${specialization}', '${degree}', ${fee}, ${department_id})`, (err, result) => {
             if (err) {
                 throw err;
             } else {
